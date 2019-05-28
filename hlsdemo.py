@@ -29,7 +29,7 @@ def get_host(url, only_host=False):
 
 # 获取最佳分辨率
 def get_best_url(playlist):
-    res = request.get(playlist, headers=headers)
+    res = request.get(playlist)
     data = res.text
     # 提取 m3u8 所有的 URL
     rule_m3u8_url = r"^[\w\-\.\/\:\?\&\=\%\,\+]+"
@@ -49,7 +49,7 @@ def get_best_url(playlist):
 
 # 获取 m3u8 的信息
 def get_video_info(m3u8_url):
-    res = request.get(m3u8_url, headers=headers)
+    res = request.get(m3u8_url)
     data = res.text
     # 提取 KEY 的 URL
     rule_key = r'URI=\"(.*?)\"'
@@ -108,6 +108,7 @@ def download(info):
     else:
         videoin = " ".join(video_list)
         os.system("cat " + videoin + " > all.ts")
+    print("Finished")
 
 
 if __name__ == "__main__":
